@@ -1,0 +1,9 @@
+{
+  "$type": "Sungero.DataExport.ExportingObject, Sungero.DataExport",
+  "Uuid": "f95f0e76-033f-4b49-a6e9-73af90e27279",
+  "ModuleNameGuid": "f95f0e76-033f-4b49-a6e9-73af90e27279",
+  "HelpCode": "Akelon_Example",
+  "Status": "Active",
+  "SortingPriority": "Medium",
+  "StoreAsDefaultSetting": true
+}

@@ -1,0 +1,136 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "f95f0e76-033f-4b49-a6e9-73af90e27279",
+  "Name": "OpenXML",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Akelon.OpenXML.Client",
+  "ClientBaseAssemblyName": "Akelon.OpenXML.ClientBase",
+  "ClientBaseNamespace": "Akelon.OpenXML.ClientBase",
+  "ClientNamespace": "Akelon.OpenXML.Client",
+  "Code": "OpenXML",
+  "CompanyCode": "Akelon",
+  "Cover": {
+    "NameGuid": "73dd5107-2fb4-46ec-9a6c-14bb3d7c239e",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "04efdad6-afe2-44d5-9004-d1652e54f3bc",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "e249c184-79c7-4cd7-94fa-68e884c58b2b",
+      "BackgroundPosition": "Tile"
+    },
+    "RemoteControls": [],
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "253ad837-cf41-4450-863f-9d9afae99a3e",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "ec7b606a-21ee-4f16-aba8-ab8c2af76d12",
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Akelon.OpenXML",
+  "IsolatedAreas": [
+    {
+      "NameGuid": "1b1ab0cc-18fc-43e8-b7cf-785f96e0e0d7",
+      "Name": "AkelonOpenXMLWrapper"
+    }
+  ],
+  "IsolatedAssemblyName": "Akelon.OpenXML.Isolated",
+  "IsolatedFunctions": [
+    {
+      "NameGuid": "05be4da6-24cd-4dd9-8e7c-0a68dca8fa32",
+      "Name": "ExampleWorkWithArea",
+      "IsolatedAreaId": "1b1ab0cc-18fc-43e8-b7cf-785f96e0e0d7",
+      "Parameters": [
+        {
+          "Name": "stream",
+          "ParameterType": "global::System.IO.Stream",
+          "ParameterTypeFullName": "System.IO.Stream"
+        },
+        {
+          "Name": "image",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.IO.Stream",
+      "ReturnTypeFullName": "System.IO.Stream"
+    },
+    {
+      "NameGuid": "8a1c292a-bb7a-4810-84a7-df8c75c9a441",
+      "Name": "GenerateStamp",
+      "IsolatedAreaId": "1b1ab0cc-18fc-43e8-b7cf-785f96e0e0d7",
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "type",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.IO.Stream",
+      "ReturnTypeFullName": "System.IO.Stream"
+    }
+  ],
+  "IsolatedNamespace": "Akelon.OpenXML.Isolated",
+  "Libraries": [
+    {
+      "NameGuid": "1e9612c4-ac13-480f-90c0-4c47ce1c2af2",
+      "Name": "OpenXML",
+      "Scope": "Both"
+    }
+  ],
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Akelon.OpenXML",
+  "ResourcesKeys": [
+    "Logo",
+    "ExampleDialog_ResourceKey",
+    "ExampleDialog_DescriptionResourceKey",
+    "TemplateDemoSolution",
+    "TemplateExtension",
+    "Demo",
+    "Template",
+    "ErrorNoFoundTemplate"
+  ],
+  "ServerAssemblyName": "Akelon.OpenXML.Server",
+  "ServerNamespace": "Akelon.OpenXML.Server",
+  "SharedAssemblyName": "Akelon.OpenXML.Shared",
+  "SharedNamespace": "Akelon.OpenXML.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}
