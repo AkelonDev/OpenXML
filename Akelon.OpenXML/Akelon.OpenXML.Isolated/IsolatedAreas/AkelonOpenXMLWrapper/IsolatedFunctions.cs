@@ -18,7 +18,7 @@ using System.Text;
 using BorderValues = DocumentFormat.OpenXml.Wordprocessing.BorderValues;
 using Aspose.BarCode.Generation;
 
-namespace Akelon.Example.Isolated.AkelonOpenXMLWrapper
+namespace Akelon.OpenXML.Isolated.AkelonOpenXMLWrapper
 {
   public class IsolatedFunctions
   {
@@ -32,6 +32,7 @@ namespace Akelon.Example.Isolated.AkelonOpenXMLWrapper
     [Public]
     public static Stream ExampleWorkWithArea(Stream stream, string image)
     {
+      System.Diagnostics.Debugger.Break();
       using (WordprocessingDocument document = WordprocessingDocument.Open(stream, true))
       {
         MainDocumentPart mainPart = document.MainDocumentPart;
@@ -62,28 +63,20 @@ namespace Akelon.Example.Isolated.AkelonOpenXMLWrapper
 
           #region Записать картинку в ячейку.
           
-          // Получить ячейку в третей строке пятой колонки.
+          // Получить ячейку в третьей строке пятой колонки.
           var cell = GetTableCell(table, 2, 4);
           
           if (cell != null)
           {
-            DocumentFormat.OpenXml.Packaging.ImagePart imagePart = mainPart.AddImagePart(ImagePartType.Png);
-            
             // image - картнка в base64 из локализации.
             var bytesImage = Convert.FromBase64String(image);
             
-            using (var imgStream = new MemoryStream(bytesImage))
-            {
-              imagePart.FeedData(imgStream);
-            }
-
             // Удалить дочерние элементы ячейки.
             cell.RemoveAllChildren();
             
             // Вставить изображение в ячейку.
-            AddImageToCell(cell, mainPart.GetIdOfPart(imagePart));
-
-            mainPart.Document.Save();
+            using (var imgStream = new MemoryStream(bytesImage))
+              AddImageToCell(mainPart, cell, imgStream);
           }
 
           // Получить ячейку во второй строке пятой колонки.
@@ -91,20 +84,14 @@ namespace Akelon.Example.Isolated.AkelonOpenXMLWrapper
           
           if (cell != null)
           {
-            DocumentFormat.OpenXml.Packaging.ImagePart imagePart = mainPart.AddImagePart(ImagePartType.Png);
-            
             // Сгенерировать qr-код.
             var qrcode = GenerateStamp("https://akelon.com/", EncodeTypes.QR.TypeName);
             qrcode.Position = 0;
-            imagePart.FeedData(qrcode);
             
             // Удалить дочернии элементы ячейки.
             cell.RemoveAllChildren();
             
-            // Вставить изображение в ячейку.
-            AddImageToCell(cell, mainPart.GetIdOfPart(imagePart));
-
-            mainPart.Document.Save();
+            AddImageToCell(mainPart, cell, qrcode);
           }
           
           #endregion
@@ -849,74 +836,84 @@ namespace Akelon.Example.Isolated.AkelonOpenXMLWrapper
     /// <summary>
     /// Вставить картинку в ячейку.
     /// </summary>
+    /// <param name="mainPart">MainDocumentPart документа.</param>
     /// <param name="cell">Ячейка.</param>
-    /// <param name="relationshipId">Идетификатор изображения.</param>
-    public static void AddImageToCell(TableCell cell, string relationshipId)
+    /// <param name="imageStream">Поток изображения.</param>
+    public static void AddImageToCell(MainDocumentPart mainPart, TableCell cell, Stream imageStream)
     {
-      var element =
-        new Drawing(
-          new DW.Inline(
-            new DW.Extent() { Cx = 990000L, Cy = 792000L },
-            new DW.EffectExtent()
+      using (var memoryStream = new MemoryStream())
+      {
+        imageStream.CopyTo(memoryStream);
+        DocumentFormat.OpenXml.Packaging.ImagePart imagePart = mainPart.AddImagePart(ImagePartType.Png);
+        memoryStream.Position = 0;
+        imagePart.FeedData(memoryStream);
+        var relationshipId = mainPart.GetIdOfPart(imagePart);
+        
+        var element =
+          new Drawing(
+            new DW.Inline(
+              new DW.Extent() { Cx = 990000L, Cy = 792000L },
+              new DW.EffectExtent()
+              {
+                LeftEdge = 0L,
+                TopEdge = 0L,
+                RightEdge = 0L,
+                BottomEdge = 0L
+              },
+              new DW.DocProperties()
+              {
+                Id = (UInt32Value)1U,
+                Name = "Picture 1"
+              },
+              new DW.NonVisualGraphicFrameDrawingProperties(
+                new A.GraphicFrameLocks() { NoChangeAspect = true }),
+              new A.Graphic(
+                new A.GraphicData(
+                  new PIC.Picture(
+                    new PIC.NonVisualPictureProperties(
+                      new PIC.NonVisualDrawingProperties()
+                      {
+                        Id = (UInt32Value)0U,
+                        Name = "New Bitmap Image.jpg"
+                      },
+                      new PIC.NonVisualPictureDrawingProperties()),
+                    new PIC.BlipFill(
+                      new A.Blip(
+                        new A.BlipExtensionList(
+                          new A.BlipExtension()
+                          {
+                            Uri = "{28A0092B-C50C-407E-A947-70E740481C1C}"
+                          })
+                       )
+                      {
+                        Embed = relationshipId,
+                        CompressionState =
+                          A.BlipCompressionValues.Print
+                      },
+                      new A.Stretch(
+                        new A.FillRectangle())),
+                    new PIC.ShapeProperties(
+                      new A.Transform2D(
+                        new A.Offset() { X = 0L, Y = 0L },
+                        new A.Extents() { Cx = 990000L, Cy = 792000L }),
+                      new A.PresetGeometry(
+                        new A.AdjustValueList()
+                       )
+                      { Preset = A.ShapeTypeValues.Rectangle }))
+                 )
+                { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" })
+             )
             {
-              LeftEdge = 0L,
-              TopEdge = 0L,
-              RightEdge = 0L,
-              BottomEdge = 0L
-            },
-            new DW.DocProperties()
-            {
-              Id = (UInt32Value)1U,
-              Name = "Picture 1"
-            },
-            new DW.NonVisualGraphicFrameDrawingProperties(
-              new A.GraphicFrameLocks() { NoChangeAspect = true }),
-            new A.Graphic(
-              new A.GraphicData(
-                new PIC.Picture(
-                  new PIC.NonVisualPictureProperties(
-                    new PIC.NonVisualDrawingProperties()
-                    {
-                      Id = (UInt32Value)0U,
-                      Name = "New Bitmap Image.jpg"
-                    },
-                    new PIC.NonVisualPictureDrawingProperties()),
-                  new PIC.BlipFill(
-                    new A.Blip(
-                      new A.BlipExtensionList(
-                        new A.BlipExtension()
-                        {
-                          Uri = "{28A0092B-C50C-407E-A947-70E740481C1C}"
-                        })
-                     )
-                    {
-                      Embed = relationshipId,
-                      CompressionState =
-                        A.BlipCompressionValues.Print
-                    },
-                    new A.Stretch(
-                      new A.FillRectangle())),
-                  new PIC.ShapeProperties(
-                    new A.Transform2D(
-                      new A.Offset() { X = 0L, Y = 0L },
-                      new A.Extents() { Cx = 990000L, Cy = 792000L }),
-                    new A.PresetGeometry(
-                      new A.AdjustValueList()
-                     )
-                    { Preset = A.ShapeTypeValues.Rectangle }))
-               )
-              { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" })
-           )
-          {
-            DistanceFromTop = (UInt32Value)0U,
-            DistanceFromBottom = (UInt32Value)0U,
-            DistanceFromLeft = (UInt32Value)0U,
-            DistanceFromRight = (UInt32Value)0U
-          });
+              DistanceFromTop = (UInt32Value)0U,
+              DistanceFromBottom = (UInt32Value)0U,
+              DistanceFromLeft = (UInt32Value)0U,
+              DistanceFromRight = (UInt32Value)0U
+            });
 
-      cell.Append(new Paragraph(new Run(element)));
+        cell.Append(new Paragraph(new Run(element)));
+      }
     }
-
+    
     #endregion
   }
 }

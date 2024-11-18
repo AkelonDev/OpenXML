@@ -32,10 +32,7 @@ namespace Akelon.OpenXML.Server
     {
       var externalLink = Sungero.Docflow.PublicFunctions.Module.GetExternalLink(typeof(Sungero.Docflow.IDocumentTemplate).GetTypeGuid(), Constants.Module.TemplateExample);
       
-      if (externalLink != null)
-        return Sungero.Docflow.DocumentTemplates.GetAll(x => x.Id == externalLink.EntityId.Value).FirstOrDefault();
-      
-      return null;
+      return Sungero.Docflow.DocumentTemplates.GetAll(x => externalLink != null && x.Id == externalLink.EntityId.Value).FirstOrDefault();
     }
     
     /// <summary>
@@ -45,23 +42,22 @@ namespace Akelon.OpenXML.Server
     [Remote]
     public Sungero.Docflow.ISimpleDocument ExampleMethod()
     {
-      // Получить шаблон.
       var template = GetTemplate();
       
       if (template == null)
         throw AppliedCodeException.Create(Akelon.OpenXML.Resources.ErrorNoFoundTemplate);
       
-      var body = new System.IO.MemoryStream();
-      template.LastVersion.Body.Read().CopyTo(body);
-      
-      // Выполнить подстановку значений в элементы управления.
-      var result = Akelon.OpenXML.IsolatedFunctions.AkelonOpenXMLWrapper.ExampleWorkWithArea(body, OpenXML.Resources.Logo.ToString());
-      
-      // Создать простой документ для отобрадения выполнненной подстановки.
-      var simpleDcument = CreateSimpleDocument();
-      simpleDcument.CreateVersionFrom(result, template.AssociatedApplication.Extension);
-      
-      return simpleDcument;
+      using (var stream = new MemoryStream())
+      {
+        template.LastVersion.Body.Read().CopyTo(stream);
+        
+        var result = Akelon.OpenXML.IsolatedFunctions.AkelonOpenXMLWrapper.ExampleWorkWithArea(stream, OpenXML.Resources.Logo.ToString());
+        
+        var simpleDcument = CreateSimpleDocument();
+        simpleDcument.CreateVersionFrom(result, template.AssociatedApplication.Extension);
+        
+        return simpleDcument;
+      }
     }
     
   }

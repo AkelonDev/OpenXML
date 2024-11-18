@@ -29,7 +29,6 @@ namespace Akelon.OpenXML.Server
       {
         var template = Sungero.Docflow.DocumentTemplates.Create();
         template.Name = Akelon.OpenXML.Resources.TemplateDemoSolution;
-        // HACK. Строка base64 хранится в SQL запросе, т.к. локализация не позволяет хранить такую длину.
         var bytes = Convert.FromBase64String(Queries.Module.Template);
         
         using (var stream = new MemoryStream(bytes))

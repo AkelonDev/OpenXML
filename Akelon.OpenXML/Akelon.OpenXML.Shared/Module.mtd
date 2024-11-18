@@ -73,7 +73,7 @@
       "ReturnTypeFullName": "System.IO.Stream"
     },
     {
-      "NameGuid": "8a1c292a-bb7a-4810-84a7-df8c75c9a441",
+      "NameGuid": "321b3d77-c645-42c4-811a-cd7ff5100a98",
       "Name": "GenerateStamp",
       "IsolatedAreaId": "1b1ab0cc-18fc-43e8-b7cf-785f96e0e0d7",
       "Parameters": [
