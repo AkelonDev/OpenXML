@@ -20,7 +20,7 @@ using Aspose.BarCode.Generation;
 
 namespace Akelon.OpenXML.Isolated.AkelonOpenXMLWrapper
 {
-  public class IsolatedFunctions
+  public partial class IsolatedFunctions
   {
 
     /// <summary>
