@@ -27,7 +27,6 @@
     "Tabs": []
   },
   "DesktopViews": [],
-  "IconResourcesKeys": [],
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "InterfaceNamespace": "Akelon.Wrapper",
@@ -38,7 +37,6 @@
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "Akelon.Wrapper",
-  "ResourcesKeys": [],
   "ServerAssemblyName": "Akelon.Wrapper.Server",
   "ServerNamespace": "Akelon.Wrapper.Server",
   "SharedAssemblyName": "Akelon.Wrapper.Shared",
@@ -49,11 +47,11 @@
   "Versions": [
     {
       "Type": "SolutionMetadata",
-      "Number": 9
+      "Number": 11
     },
     {
       "Type": "ModuleMetadata",
-      "Number": 9
+      "Number": 11
     },
     {
       "Type": "DomainApi",

@@ -10,7 +10,7 @@ using Sungero.Domain.Shared;
 
 namespace Akelon.OpenXML.Server
 {
-  public class ModuleFunctions
+  public partial class ModuleFunctions
   {
 
     /// <summary>

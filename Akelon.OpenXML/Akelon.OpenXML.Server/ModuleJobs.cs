@@ -6,7 +6,7 @@ using Sungero.CoreEntities;
 
 namespace Akelon.OpenXML.Server
 {
-  public class ModuleJobs
+  public partial class ModuleJobs
   {
 
   }
