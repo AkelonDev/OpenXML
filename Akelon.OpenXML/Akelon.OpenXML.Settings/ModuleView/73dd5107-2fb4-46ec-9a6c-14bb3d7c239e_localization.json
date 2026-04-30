@@ -1,11 +1,15 @@
 {
-  "Action_Title_e1b70ee85bde45a1a0e9f47b156c68ac": {
+  "Action_Description_c5e7d1fdffc94ae4bd85f32aa62f4a5f": {
+    "en-US": "A simple document will be created from a special template.",
+    "ru-RU": "Будет создан простой документ из специального шаблона"
+  },
+  "Action_Title_c5e7d1fdffc94ae4bd85f32aa62f4a5f": {
     "en-US": "Dialog for filling out the demo template",
     "ru-RU": "Диалог заполнения демонстрационного шаблона"
   },
   "CoverHeaderSettings_Description_e249c18479c74cd794fa68e884c58b2b": {
     "en-US": "Demonstration of working with OpenXML",
-    "ru-RU": "Демонстарция работы с OpenXML"
+    "ru-RU": "Демонстрация работы с OpenXML"
   },
   "CoverHeaderSettings_Title_e249c18479c74cd794fa68e884c58b2b": {
     "en-US": "OpenXML",
@@ -14,16 +18,16 @@
   "Description": {
     "ru-RU": "Демонстрация библиотеки AkelonOpenXMLWrapper"
   },
-  "Example_Title_79d97a747f2048f5a992e6a02d45e7c1": {
-    "en-US": "Example",
-    "ru-RU": "Примеры"
-  },
-  "General_Title_39f35bfc1e3445628afc89efbf8a0eff": {
-    "en-US": "General",
+  "Group_Title_8e5b15ed5746416f9215432fe7eb8f5c": {
+    "en-US": "Examples",
     "ru-RU": "Примеры"
   },
   "Name": {
-    "en-US": "Example",
+    "en-US": "OpenXML",
     "ru-RU": "Пример"
+  },
+  "Tab_Title_2021b834c07d42bd9b4e4ae28ae7d61d": {
+    "en-US": "Examples",
+    "ru-RU": "Примеры"
   }
 }

@@ -97,6 +97,11 @@
       "NameGuid": "1e9612c4-ac13-480f-90c0-4c47ce1c2af2",
       "Name": "OpenXML",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "1893f879-81b2-462c-9736-f1a535d86ea8",
+      "Name": "AkelonOpenXMLWrapper",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
